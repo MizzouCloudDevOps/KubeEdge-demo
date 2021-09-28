@@ -1,0 +1,4 @@
+example commands to run : 
+
+grep 'Workflow wall time' /output/20210928-173755/wf-20210928-173755/statistics/summary.txt
+
