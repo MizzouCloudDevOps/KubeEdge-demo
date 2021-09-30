@@ -18,7 +18,7 @@ spec:
         tier: server
     spec:
       nodeSelector:
-        nodePool: worker
+        kubernetes.io/hostname: edge-node1
       containers:
       - name: fastqc
         image: mizzouceri/fastqc_wf:V1
@@ -32,7 +32,7 @@ spec:
             hostPort: 20
         volumeMounts:
           - name: output
-            mountPath: /home/bamboo/output
+            mountPath: ~/output
       restartPolicy: Always
       volumes:
         - name: output
