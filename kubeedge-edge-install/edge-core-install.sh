@@ -74,16 +74,16 @@ export GO111MODULE=auto" | tee -a /etc/bash.bashrc || checkErr "Adding path envi
 . /etc/bash.bashrc || checkErr "Loading environment variables..."
 echo -e "\n${BLUE}Go path environment variables successfully loaded...${NC}\n"
 
-# install Kubeedge v1.6.0
-echo -e "\n${GREEN}Installing KubeEdge v1.6.0...${NC}\n"
+# install Kubeedge v1.8.1
+echo -e "\n${GREEN}Installing KubeEdge v1.8.1...${NC}\n"
 rm -rf /etc/kubeedge
 mkdir -p /etc/kubeedge/ || checkErr "Creating kubeedge directory"
 cd /etc/kubeedge
 
 The following Kubeedge version is only for CloudNode with AMD64 architecture
-echo -e "\n${GREEN}Downloading KubeEdge v1.6.0...${NC}\n"
-rm kubeedge-v1.6.0-linux-amd64.tar.gz
-wget https://github.com/kubeedge/kubeedge/releases/download/v1.6.0/kubeedge-v1.6.0-linux-amd64.tar.gz || checkErr "Error downloading Kubeedge ..."
+echo -e "\n${GREEN}Downloading KubeEdge v1.8.1...${NC}\n"
+rm kubeedge-v1.8.1-linux-amd64.tar.gz
+wget https://github.com/kubeedge/kubeedge/releases/download/v1.8.1/keadm-v1.8.1-linux-amd64.tar.gz || checkErr "Error downloading Kubeedge ..."
 echo -e "\n${BLUE}Kubeedge successfully downloaded...${NC}\n"
 
 echo -e "\n${GREEN}Downloading KubeEdge git repo...${NC}\n"

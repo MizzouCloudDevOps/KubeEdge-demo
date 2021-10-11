@@ -7,6 +7,11 @@
 # The script require one argument, the public IP addresses of Cloud node 
 # Note: This script needs to be run as root user
 
+# $1: IP of Cloud node 
+cloud_IP=$1
+
+kubeedgeVersion=1.8.1
+
 
 #check to make sure argument is provided
 if [ "$#" -ne 1 ]; then
@@ -32,10 +37,7 @@ if [[ $EUID -ne 0 ]]; then
     exit
 fi
 
-# $1: IP of Cloud node 
-cloud_IP=$1
 
-kubeedgeVersion=1.8.1
 
 cd /root/
 # install library prerequisites

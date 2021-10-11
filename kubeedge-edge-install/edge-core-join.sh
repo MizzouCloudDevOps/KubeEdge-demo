@@ -11,11 +11,12 @@
 cloud_IP=$1
 token=$2
 edge_name=$3
-kubeedgeVersion=1.7.1
+kubeedgeVersion=1.8.1
 
 #check to make sure argument edgeNode IP provided
 if [ "$#" -ne 3 ]; then
-    echo -e "\n${RED}Not enough arguments supplied, please provide the public IP of the Cloud node, and the token for joining the cluster, and the name of the edge node you want to use. Exiting...${NC}"
+    echo -e "\n${RED}Not enough arguments supplied, please provide the public IP of the Cloud node, 
+    the token for joining the cluster, and the name of the edge node you want to use. Exiting...${NC}"
     exit
 fi
 
