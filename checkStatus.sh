@@ -6,9 +6,9 @@ containerID=$(docker ps -a -q -f status=running -f "name=fastqc"  -f ancestor=mi
 
 job_id=$(docker logs $containerID | grep " pegasus-status -l " | cut -d' ' -f5) >/dev/null 2>&1
 
-docker exec $containerID bash -c "pegasus-status -l $job_id"  >/dev/null 2>&1
+docker exec $containerID bash -c ". ~/condor-8.8.9/condor.sh && pegasus-status -l $job_id"  >/dev/null 2>&1
 
-docker exec $containerID bash -c "pegasus-statistics $job_id -s all" >/dev/null 2>&1
+docker exec $containerID bash -c ". ~/condor-8.8.9/condor.sh && pegasus-statistics $job_id -s all" >/dev/null 2>&1
 
 summary=$(echo $job_id | cut -d'/' -f5,6) && grep 'Workflow wall time' /output/$summary/statistics/summary.txt
 
