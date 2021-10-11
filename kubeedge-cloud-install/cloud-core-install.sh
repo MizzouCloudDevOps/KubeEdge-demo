@@ -70,7 +70,11 @@ echo -e "\n${BLUE}Kubernetes successfully installed... \n"
 # The following golang installation is only for CloudNode with AMD64 architecture
 echo -e "\n${GREEN} Installing Golang... ${NC}\n"
 cd /root/
-rm go1.15.7.linux-amd64.tar.gz
+
+if [-f "go1.15.7.linux-amd64.tar.gz"]; then
+  rm go1.15.7.linux-amd64.tar.gz
+fi
+
 wget https://golang.org/dl/go1.15.7.linux-amd64.tar.gz || checkErr "Downloading Golang"
 tar -C /usr/ -xzf /root/go1.15.7.linux-amd64.tar.gz || checkErr "Extracting Golang package"
 echo -e "\n${BLUE}Golang successfully installed... \n"
@@ -101,7 +105,9 @@ cd /etc/kubeedge
 # echo -e "\n${BLUE}Kubeedge successfully downloaded...${NC}\n"
 
 echo -e "\n${GREEN}Downloading KubeEdge git repo...${NC}\n"
-rm -rf /usr/go/src/github.com/kubeedge/kubeedge
+if [-d "/usr/go/src/github.com/kubeedge/kubeedge"]; then
+  rm -rf /usr/go/src/github.com/kubeedge/kubeedge
+fi
 git clone https://github.com/kubeedge/kubeedge $GOPATH/src/github.com/kubeedge/kubeedge || checkErr "Downloading Kubeedge git repo"
 echo -e "\n${BLUE}Kubeedge git repo successfully downloaded...${NC}\n"
 

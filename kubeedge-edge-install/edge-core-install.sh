@@ -91,7 +91,7 @@ rm -rf $GOPATH/src/github.com/kubeedge/kubeedge
 git clone https://github.com/kubeedge/kubeedge $GOPATH/src/github.com/kubeedge/kubeedge || checkErr "Downloading Kubeedge git repo"
 echo -e "\n${BLUE}Kubeedge git repo successfully downloaded...${NC}\n"
 
-# Since the Raspberry Pi has a difference architecture than the Cloud core node, we have to compile Keadm separately on this node
+# compile Keadm on this node
 echo -e "\n${GREEN}Compiling Keadm...${NC}\n"
 cd $GOPATH/src/github.com/kubeedge/kubeedge  || checkErr "Going into Kubeedge directory"
 make all WHAT=keadm || checkErr "Error compiling Kubeedge ..."
