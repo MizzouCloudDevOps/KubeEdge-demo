@@ -13,6 +13,7 @@ token=$2
 edge_name=$3
 kubeedgeVersion=1.8.1
 
+set -e
 #check to make sure argument edgeNode IP provided
 if [ "$#" -ne 3 ]; then
     echo -e "\n${RED}Not enough arguments supplied, please provide the public IP of the Cloud node, 

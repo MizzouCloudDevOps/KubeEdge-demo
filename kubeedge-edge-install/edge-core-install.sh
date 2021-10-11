@@ -6,6 +6,8 @@
 
 # Note: This script needs to be run as root user
 
+set -e
+
 #Color declarations
 RED='\033[0;31m'
 GREEN='\033[0;32m'

@@ -12,7 +12,7 @@ cloud_IP=$1
 
 kubeedgeVersion=1.8.1
 
-
+set -e
 #check to make sure argument is provided
 if [ "$#" -ne 1 ]; then
     echo -e "\n${RED}Please provide the public IP of the Cloud node. Exiting...${NC}"

@@ -16,6 +16,7 @@
 # $1: IP of Edge node
 edge_node_IP=$1
 
+set -e
 
 #check to make sure argument edgeNode IP provided
 if [ "$#" -ne 1 ]; then
