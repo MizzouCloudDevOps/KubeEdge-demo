@@ -2,7 +2,7 @@
 
 # this script automatically retrives the summary of the job from the container that runs the workflow
 
-containerID=$(docker ps -a -q -f status=running -f "name=fastqc"  -f ancestor=mizzouceri/fastqc_wf:V1)
+containerID=$(docker ps -a -q -f status=running -f "name=fastqc"  -f ancestor=mizzouceri/fastqc_wf:V2)
 
 job_id=$(docker logs $containerID | grep " pegasus-status -l " | cut -d' ' -f5) >/dev/null 2>&1
 
