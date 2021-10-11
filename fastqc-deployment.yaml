@@ -21,7 +21,7 @@ spec:
         kubernetes.io/hostname: "Name_of_your_Node"
       containers:
       - name: fastqc
-        image: mizzouceri/fastqc_wf:V1
+        image: mizzouceri/fastqc_wf:V2
         securityContext:
           allowPrivilegeEscalation: true
         command: ["/bin/bash", "-c"]
