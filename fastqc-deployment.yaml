@@ -25,14 +25,14 @@ spec:
         securityContext:
           allowPrivilegeEscalation: true
         command: ["/bin/bash", "-c"]
-        args: ["service ssh start; . ~/condor-8.8.9/condor.sh; ~/condor-8.8.9/condor_master; . ~/pegasus-source/script1.sh; sleep infinity"]
+        args: ["service ssh start; . ~/condor-8.8.9/condor.sh; ~/condor-8.8.9/condor_master; . ~/pegasus-source/script1.sh; sleep 1000"]
         imagePullPolicy: Always
         ports:
           - containerPort: 22
             hostPort: 20
         volumeMounts:
           - name: output
-            mountPath: ~/output
+            mountPath: /home/bamboo/output
       restartPolicy: Always
       volumes:
         - name: output
