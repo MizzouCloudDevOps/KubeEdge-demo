@@ -100,11 +100,6 @@ echo -e "\n${GREEN}Installing KubeEdge v1.8.1...${NC}\n"
 mkdir -p /etc/kubeedge/ || checkErr "Error: Not able to create kubeedge directory..."
 cd /etc/kubeedge
 
-# The following Kubeedge version is only for CloudNode with AMD64 architecture
-# echo -e "\n${GREEN}Downloading KubeEdge v1.6.0...${NC}\n"
-# wget https://github.com/kubeedge/kubeedge/releases/download/v1.6.0/kubeedge-v1.6.0-linux-amd64.tar.gz || checkErr "Error downloading Kubeedge ..."
-# echo -e "\n${BLUE}Kubeedge successfully downloaded...${NC}\n"
-
 echo -e "\n${GREEN}Downloading KubeEdge git repo...${NC}\n"
 if [-d "/usr/go/src/github.com/kubeedge/kubeedge"]; then
   rm -rf /usr/go/src/github.com/kubeedge/kubeedge
@@ -148,6 +143,8 @@ nodes:
     extraPortMappings:
      - containerPort: 5000
        hostPort: 5000
+     - containerPort: 80
+       hostPort: 80
 
 EOF
 echo -e "\n${BLUE}Finished creating kind yaml file...${NC}\n"
