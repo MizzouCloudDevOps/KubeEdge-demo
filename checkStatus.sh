@@ -6,7 +6,7 @@ containerID=$(docker ps -a -q -f status=running -f "name=fastqc"  -f ancestor=mi
 
 job_id=$(docker logs $containerID | grep " pegasus-status -l " | cut -d' ' -f5) >/dev/null 2>&1
 
-docker exec $containerID bash -c "pegasus-status $job_id"  >/dev/null 2>&1
+docker exec $containerID bash -c "pegasus-status -l $job_id"  >/dev/null 2>&1
 
 docker exec $containerID bash -c "pegasus-statistics $job_id -s all" >/dev/null 2>&1
 
