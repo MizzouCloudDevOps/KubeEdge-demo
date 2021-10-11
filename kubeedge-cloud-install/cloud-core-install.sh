@@ -159,10 +159,10 @@ keadm init --advertise-address="$cloud_IP" --kubeedge-version="$kubeedgeVersion"
 echo -e "\n${BLUE}Finished creating Kubeedge cloud node...${NC}\n"
 
 # Create certificates and keys, and copy to edge node
-echo -e "\n${GREEN}Creating certificates and keys, and copying to edge node...${NC}\n"
-cd $GOPATH/src/github.com/kubeedge/kubeedge/build/tools || checkErr "Going to certgen.sh directory"
-./certgen.sh genCertAndKey edge || checkErr "Generating certificates and keys"
-echo -e "\n${BLUE}Finished creating certificates...${NC}\n"
+# echo -e "\n${GREEN}Creating certificates and keys, and copying to edge node...${NC}\n"
+# cd $GOPATH/src/github.com/kubeedge/kubeedge/build/tools || checkErr "Going to certgen.sh directory"
+# ./certgen.sh genCertAndKey edge || checkErr "Generating certificates and keys"
+# echo -e "\n${BLUE}Finished creating certificates...${NC}\n"
 
 echo -e "\n${GREEN}The KubeEdge Cloud core node has been prepared successfully... ${NC}\n"
 echo -e "\n${GREEN}Now, you should go prepare the edge node... ${NC}\n"
