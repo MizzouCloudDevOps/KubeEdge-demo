@@ -44,10 +44,13 @@ cd /root/
 echo -e "\n${GREEN}Installing required libraries.. ${NC}\n"
 apt-get -y update || checkErr "System update error..."
 apt-get -y upgrade || checkErr "System upgrade error..."
-apt-get -y install wget net-tools gcc make vim openssh-server docker.io containerd || checkErr "Library installation"
+apt-get -y install wget net-tools gcc make vim openssh-server || checkErr "Library installation"
 echo -e "\n${BLUE}Required libraries installed... \n"
 
 echo -e "\n${GREEN} Checking Docker installation.. ${NC}\n"
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
+apt-get install docker-compose
 docker --version || checkErr "Docker not installed correctly..."
 echo -e "\n${BLUE}Docker successfully installed... \n"
 
@@ -72,7 +75,7 @@ snap install kubelet --classic || checkErr "Kubelet installation"
 echo -e "\n${GREEN} Installing Golang... ${NC}\n"
 cd /root/
 
-if [-f "go1.15.7.linux-amd64.tar.gz"]; then
+if [ -f "go1.15.7.linux-amd64.tar.gz" ]; then
   rm go1.15.7.linux-amd64.tar.gz
 fi
 
@@ -101,7 +104,7 @@ mkdir -p /etc/kubeedge/ || checkErr "Error: Not able to create kubeedge director
 cd /etc/kubeedge
 
 echo -e "\n${GREEN}Downloading KubeEdge git repo...${NC}\n"
-if [-d "/usr/go/src/github.com/kubeedge/kubeedge"]; then
+if [ -d "/usr/go/src/github.com/kubeedge/kubeedge" ]; then
   rm -rf /usr/go/src/github.com/kubeedge/kubeedge
 fi
 git clone https://github.com/kubeedge/kubeedge $GOPATH/src/github.com/kubeedge/kubeedge || checkErr "Downloading Kubeedge git repo"
@@ -145,7 +148,8 @@ nodes:
        hostPort: 5000
      - containerPort: 80
        hostPort: 80
-
+     - containerPort: 22
+       hostPort: 20
 EOF
 echo -e "\n${BLUE}Finished creating kind yaml file...${NC}\n"
 
