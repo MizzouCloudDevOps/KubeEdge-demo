@@ -50,7 +50,7 @@ echo -e "\n${BLUE}Required libraries installed... \n"
 echo -e "\n${GREEN} Checking Docker installation.. ${NC}\n"
 curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh
-apt-get install docker-compose
+apt-get -y install docker-compose
 docker --version || checkErr "Docker not installed correctly..."
 echo -e "\n${BLUE}Docker successfully installed... \n"
 
@@ -142,14 +142,12 @@ networking:
   apiServerPort: 6443
 nodes:
   - role: control-plane
-    image: kindest/node:v1.17.2
+    image: kindest/node:v1.22.2
     extraPortMappings:
      - containerPort: 5000
        hostPort: 5000
      - containerPort: 80
        hostPort: 80
-     - containerPort: 22
-       hostPort: 20
 EOF
 echo -e "\n${BLUE}Finished creating kind yaml file...${NC}\n"
 
