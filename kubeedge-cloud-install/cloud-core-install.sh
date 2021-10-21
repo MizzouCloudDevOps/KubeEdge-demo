@@ -45,11 +45,15 @@ echo -e "\n${GREEN}Installing required libraries.. ${NC}\n"
 apt-get -y update || checkErr "System update error..."
 apt-get -y upgrade || checkErr "System upgrade error..."
 apt-get -y install wget net-tools gcc make vim openssh-server || checkErr "Library installation"
+# may need to install dockerio and containerd
 echo -e "\n${BLUE}Required libraries installed... \n"
 
 echo -e "\n${GREEN} Checking Docker installation.. ${NC}\n"
+
+# if docker is already installed, then the next 2 lines are not needed 
 curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh
+
 apt-get -y install docker-compose
 docker --version || checkErr "Docker not installed correctly..."
 echo -e "\n${BLUE}Docker successfully installed... \n"
@@ -123,7 +127,7 @@ echo -e "\n${BLUE}SSH key pair created...${NC}\n"
 # Install Go Kind
 echo -e "\n${GREEN}Installing Go Kind ...${NC}\n"
 cd /root/ || checkErr "Is there a /root directory? I am not able to go to that directory..."
-GO111MODULE="on" go get sigs.k8s.io/kind@v0.7.0 || checkErr "Getting Go kind"
+GO111MODULE="on" go get sigs.k8s.io/kind@v0.11.1 || checkErr "Getting Go kind"
 kind version || checkErr "Error installing kind..."
 echo -e "\n${BLUE}Go Kind successfully installed...${NC}\n"
 
@@ -142,7 +146,7 @@ networking:
   apiServerPort: 6443
 nodes:
   - role: control-plane
-    image: kindest/node:v1.22.2
+    image: kindest/node:v1.22.1
     extraPortMappings:
      - containerPort: 5000
        hostPort: 5000
@@ -153,7 +157,7 @@ echo -e "\n${BLUE}Finished creating kind yaml file...${NC}\n"
 
 # Create KubeEdge cluster using kind
 echo -e "\n${GREEN}Creating KubeEdge cluster using kind...${NC}\n"
-kind create cluster --config=/root/kind.yaml || checkErr "Creating Kubernetes cluster using Kind"
+kind create cluster --config=/root/kind.yaml --retain -v 1 || checkErr "Creating Kubernetes cluster using Kind"
 echo -e "\n${BLUE}Finished creating KubeEdge cluster using kind...${NC}\n"
 
 # Check kubernetes nodes 
