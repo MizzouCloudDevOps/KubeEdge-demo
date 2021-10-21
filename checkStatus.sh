@@ -18,3 +18,4 @@ echo -e "\n"
 echo "Printing the summary of the Job: "
 summary=$(echo $job_id | cut -d'/' -f5,6) && grep 'Workflow wall time' /output/$summary/statistics/summary.txt
 echo -e "\n"
+

@@ -12,12 +12,6 @@
 
 # This script takes one argument, the IP of the edge node to add to the cluster 
 
-
-# $1: IP of Edge node
-edge_node_IP=$1
-
-set -e
-
 #check to make sure argument edgeNode IP provided
 if [ "$#" -ne 1 ]; then
     echo -e "\n${RED}Please provide the public IP of the Edge node. Exiting...${NC}"
@@ -42,6 +36,9 @@ if [[ $EUID -ne 0 ]]; then
     exit
 fi
 
+
+# $1: IP of Edge node
+edge_node_IP=$1
 
 cd /root/
 

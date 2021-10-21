@@ -18,14 +18,14 @@ spec:
         tier: server
     spec:
       nodeSelector:
-        kubernetes.io/hostname: "Name_of_your_Node"
+        nodePool: worker
       containers:
       - name: fastqc
         image: mizzouceri/fastqc_wf:V2
         securityContext:
           allowPrivilegeEscalation: true
         command: ["/bin/bash", "-c"]
-        args: ["service ssh start; . ~/condor-8.8.9/condor.sh; ~/condor-8.8.9/condor_master; . ~/pegasus-source/script1.sh; sleep 1000"]
+        args: ["service ssh start; . ~/condor-8.8.9/condor.sh; ~/condor-8.8.9/condor_master; . ~/pegasus-source/script1.sh; sleep 600"]
         imagePullPolicy: Always
         ports:
           - containerPort: 22
