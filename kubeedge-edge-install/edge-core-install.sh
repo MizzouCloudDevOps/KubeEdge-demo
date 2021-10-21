@@ -26,21 +26,29 @@ if [[ $EUID -ne 0 ]]; then
     exit
 fi
 
+cd /root/
 # install library prerequisites
 echo -e "\n${GREEN}Installing required libraries.. ${NC}\n"
-apt-get -y update || checkErr "System update"
-apt-get -y upgrade || checkErr "System upgrade"
-apt-get -y install wget net-tools gcc make vim openssh-server docker.io containerd || checkErr "Library installation"
+apt-get -y update || checkErr "System update error..."
+apt-get -y upgrade || checkErr "System upgrade error..."
+apt-get -y install wget net-tools gcc make vim openssh-server || checkErr "Library installation"
+# may need to install dockerio and containerd
 echo -e "\n${BLUE}Required libraries installed... \n"
 
 echo -e "\n${GREEN} Checking Docker installation.. ${NC}\n"
-dockerd &> /dev/null &
-docker --version || checkErr "Docker installation"
+
+# if docker is already installed, then the next 2 lines are not needed 
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
+
+apt-get -y install docker-compose
+docker --version || checkErr "Docker not installed correctly..."
 echo -e "\n${BLUE}Docker successfully installed... \n"
 
 # install snap package manager
 echo -e "\n${GREEN}Installing snap package manager...${NC}\n"
 apt-get -y install snap
+apt-get -y install snapd 
 echo -e "\n${BLUE}Snap successfully installed... \n"
 
 echo -e "\n${GREEN}Installing Kubernetes packages...${NC}\n"
@@ -54,12 +62,16 @@ snap install kubeadm --classic || checkErr "Kubeadm installation"
 # kubectl version  
 # echo -e "\n${BLUE}Kubernetes successfully installed... \n"
 
-# The following golang installation is only for edgeNode with amd64 architecture
+# The following golang installation is only for CloudNode with AMD64 architecture
 echo -e "\n${GREEN} Installing Golang... ${NC}\n"
 cd /root/
-rm go1.16.linux-amd64.tar.gz
-wget https://golang.org/dl/go1.16.linux-amd64.tar.gz || checkErr "Downloading Golang"
-tar -C /usr/ -xzf /root/go1.16.linux-amd64.tar.gz || checkErr "Extracting Golang package"
+
+if [ -f "go1.17.2.linux-amd64.tar.gz" ]; then
+  rm go1.17.2.linux-amd64.tar.gz
+fi
+
+wget https://golang.org/dl/go1.17.2.linux-amd64.tar.gz || checkErr "Downloading Golang"
+tar -C /usr/ -xzf /root/go1.17.2.linux-amd64.tar.gz || checkErr "Extracting Golang package"
 echo -e "\n${BLUE}Golang successfully installed... \n"
 
 # add environment variables
