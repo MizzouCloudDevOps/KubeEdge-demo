@@ -79,8 +79,8 @@ snap install kubelet --classic || checkErr "Kubelet installation"
 echo -e "\n${GREEN} Installing Golang... ${NC}\n"
 cd /root/
 
-if [ -f "go1.15.7.linux-amd64.tar.gz" ]; then
-  rm go1.15.7.linux-amd64.tar.gz
+if [ -f "go1.17.2.linux-amd64.tar.gz" ]; then
+  rm go1.17.2.linux-amd64.tar.gz
 fi
 
 wget https://golang.org/dl/go1.17.2.linux-amd64.tar.gz || checkErr "Downloading Golang"
@@ -100,6 +100,7 @@ export GOBIN=\$GOPATH/bin
 export PATH=\$PATH:\$GOBIN:\$GOROOT/bin
 export GO111MODULE=auto" | tee -a /etc/bash.bashrc || checkErr "Adding path environment variables into system"
 /bin/bash -c '. /etc/bash.bashrc' || checkErr "Loading environment variables..."
+echo "GOPATH is set at $GOPATH \n"
 echo -e "\n${BLUE}Go path environment variables successfully loaded...${NC}\n"
 
 # install Kubeedge v1.8.1
@@ -127,7 +128,7 @@ echo -e "\n${BLUE}SSH key pair created...${NC}\n"
 # Install Go Kind
 echo -e "\n${GREEN}Installing Go Kind ...${NC}\n"
 cd /root/ || checkErr "Is there a /root directory? I am not able to go to that directory..."
-GO111MODULE="on" go get sigs.k8s.io/kind@v0.11.1 || checkErr "Getting Go kind"
+GO111MODULE="on" go get sigs.k8s.io/kind@v0.7.0 || checkErr "Getting Go kind"
 kind version || checkErr "Error installing kind..."
 echo -e "\n${BLUE}Go Kind successfully installed...${NC}\n"
 
