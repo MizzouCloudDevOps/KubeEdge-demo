@@ -83,8 +83,8 @@ if [ -f "go1.15.7.linux-amd64.tar.gz" ]; then
   rm go1.15.7.linux-amd64.tar.gz
 fi
 
-wget https://golang.org/dl/go1.15.7.linux-amd64.tar.gz || checkErr "Downloading Golang"
-tar -C /usr/ -xzf /root/go1.15.7.linux-amd64.tar.gz || checkErr "Extracting Golang package"
+wget https://golang.org/dl/go1.17.2.linux-amd64.tar.gz || checkErr "Downloading Golang"
+tar -C /usr/ -xzf /root/go1.17.2.linux-amd64.tar.gz || checkErr "Extracting Golang package"
 echo -e "\n${BLUE}Golang successfully installed... \n"
 
 # add environment variables
@@ -133,7 +133,7 @@ echo -e "\n${BLUE}Go Kind successfully installed...${NC}\n"
 
 # Download kindest
 echo -e "\n${GREEN}Downloading kindest Docker image...${NC}\n"
-docker pull kindest/node:v1.17.2 || checkErr "Downloading kindest Docker image"
+docker pull kindest/node:v1.22.2 || checkErr "Downloading kindest Docker image"
 echo -e "\n${BLUE}Finished downloading kindest Docker image...${NC}\n"
 
 # Configure kindest
@@ -146,7 +146,7 @@ networking:
   apiServerPort: 6443
 nodes:
   - role: control-plane
-    image: kindest/node:v1.22.1
+    image: kindest/node:v1.22.2
     extraPortMappings:
      - containerPort: 5000
        hostPort: 5000
