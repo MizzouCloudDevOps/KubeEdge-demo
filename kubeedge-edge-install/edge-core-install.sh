@@ -95,7 +95,7 @@ rm -rf /etc/kubeedge
 mkdir -p /etc/kubeedge/ || checkErr "Creating kubeedge directory"
 cd /etc/kubeedge
 
-The following Kubeedge version is only for CloudNode with AMD64 architecture
+#The following Kubeedge version is only for CloudNode with AMD64 architecture
 echo -e "\n${GREEN}Downloading KubeEdge v1.8.1...${NC}\n"
 rm kubeedge-v1.8.1-linux-amd64.tar.gz
 wget https://github.com/kubeedge/kubeedge/releases/download/v1.8.1/keadm-v1.8.1-linux-amd64.tar.gz || checkErr "Error downloading Kubeedge ..."
