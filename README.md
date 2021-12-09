@@ -6,6 +6,6 @@
 
 ### We recommend to install Kubernetes cluster v1.17 and Kubectl client v1.17.
 
-### If you client Kubectl version is too new, it will have issues too. 
+### If your client Kubectl version is too new, it will have issues too. 
 
 
