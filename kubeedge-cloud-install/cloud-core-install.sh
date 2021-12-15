@@ -40,13 +40,14 @@ kubeedgeVersion=1.7.1
 cd /root/
 # install library prerequisites
 echo -e "\n${GREEN}Installing required libraries.. ${NC}\n"
-apt-get -y update || checkErr "System update error..."
-apt-get -y upgrade || checkErr "System upgrade error..."
+apt-get -y update || checkErr "System update"
+apt-get -y upgrade || checkErr "System upgrade"
 apt-get -y install wget net-tools gcc make vim openssh-server docker.io containerd || checkErr "Library installation"
 echo -e "\n${BLUE}Required libraries installed... \n"
 
 echo -e "\n${GREEN} Checking Docker installation.. ${NC}\n"
-docker --version || checkErr "Docker not installed correctly..."
+systemctl restart docker || checkErr "Docker restart "
+docker --version || checkErr "Docker installation "
 echo -e "\n${BLUE}Docker successfully installed... \n"
 
 # install snap package manager
@@ -62,15 +63,19 @@ snap install kubeadm --classic || checkErr "Kubeadm installation"
 snap install kubelet --classic || checkErr "Kubelet installation"
 # check Kubernetes install
 echo -e "\n${GREEN} Checking Kubernetes installation.. ${NC}\n"
-kubectl version  
+kubectl version
 echo -e "\n${BLUE}Kubernetes successfully installed... \n"
+echo -e "\n${BLUE}Installing containerd network addon...\n"
+# install network cni interface
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/2140ac876ef134e0ed5af15c65e414cf26827915/Documentation/kube-flannel.yml
+echo -e "\n${BLUE}Kubernetes network addon installed... \n"
 
 # The following golang installation is only for CloudNode with AMD64 architecture
 echo -e "\n${GREEN} Installing Golang... ${NC}\n"
 cd /root/
-rm go1.15.7.linux-amd64.tar.gz
-wget https://golang.org/dl/go1.15.7.linux-amd64.tar.gz || checkErr "Downloading Golang"
-tar -C /usr/ -xzf /root/go1.15.7.linux-amd64.tar.gz || checkErr "Extracting Golang package"
+rm go1.16.12.linux-amd64.tar.gz
+wget https://golang.org/dl/go1.16.12.linux-amd64.tar.gz || checkErr "Downloading Golang"
+tar -C /usr/ -xzf /root/go1.16.12.linux-amd64.tar.gz || checkErr "Extracting Golang package"
 echo -e "\n${BLUE}Golang successfully installed... \n"
 
 # add environment variables
