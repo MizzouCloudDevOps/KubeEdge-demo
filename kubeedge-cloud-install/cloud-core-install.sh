@@ -65,10 +65,6 @@ snap install kubelet --classic || checkErr "Kubelet installation"
 echo -e "\n${GREEN} Checking Kubernetes installation.. ${NC}\n"
 kubectl version
 echo -e "\n${BLUE}Kubernetes successfully installed... \n"
-echo -e "\n${BLUE}Installing containerd network addon...\n"
-# install network cni interface
-kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/2140ac876ef134e0ed5af15c65e414cf26827915/Documentation/kube-flannel.yml
-echo -e "\n${BLUE}Kubernetes network addon installed... \n"
 
 # The following golang installation is only for CloudNode with AMD64 architecture
 echo -e "\n${GREEN} Installing Golang... ${NC}\n"
@@ -152,6 +148,11 @@ echo -e "\n${BLUE}Finished creating kind yaml file...${NC}\n"
 echo -e "\n${GREEN}Creating KubeEdge cluster using kind...${NC}\n"
 kind create cluster --config=/root/kind.yaml || checkErr "Creating Kubernetes cluster using Kind"
 echo -e "\n${BLUE}Finished creating KubeEdge cluster using kind...${NC}\n"
+
+echo -e "\n${BLUE}Installing containerd network addon...\n"
+# install network cni interface
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/2140ac876ef134e0ed5af15c65e414cf26827915/Documentation/kube-flannel.yml
+echo -e "\n${BLUE}Kubernetes network addon installed... \n"
 
 # Check kubernetes nodes 
 echo -e "\n${GREEN}Checking Kubernetes nodes...${NC}\n"
