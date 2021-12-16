@@ -121,9 +121,9 @@ GO111MODULE="on" go get sigs.k8s.io/kind@v0.7.0 || checkErr "Getting Go kind"
 kind version || checkErr "Error installing kind..."
 echo -e "\n${BLUE}Go Kind successfully installed...${NC}\n"
 
-systemctl restart docker || checkErr "Docker restart "
 # Download kindest
 echo -e "\n${GREEN}Downloading kindest Docker image...${NC}\n"
+systemctl restart docker || checkErr "Docker restart "
 docker pull kindest/node:v1.17.2 || checkErr "Downloading kindest Docker image"
 echo -e "\n${BLUE}Finished downloading kindest Docker image...${NC}\n"
 
