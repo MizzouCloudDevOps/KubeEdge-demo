@@ -46,7 +46,7 @@ apt-get -y install wget net-tools gcc make vim openssh-server docker.io containe
 echo -e "\n${BLUE}Required libraries installed... \n"
 
 echo -e "\n${GREEN} Checking Docker installation.. ${NC}\n"
-systemctl restart docker || checkErr "Docker restart "
+# systemctl restart docker || checkErr "Docker restart "
 docker --version || checkErr "Docker installation "
 echo -e "\n${BLUE}Docker successfully installed... \n"
 
@@ -121,6 +121,7 @@ GO111MODULE="on" go get sigs.k8s.io/kind@v0.7.0 || checkErr "Getting Go kind"
 kind version || checkErr "Error installing kind..."
 echo -e "\n${BLUE}Go Kind successfully installed...${NC}\n"
 
+systemctl restart docker || checkErr "Docker restart "
 # Download kindest
 echo -e "\n${GREEN}Downloading kindest Docker image...${NC}\n"
 docker pull kindest/node:v1.17.2 || checkErr "Downloading kindest Docker image"
