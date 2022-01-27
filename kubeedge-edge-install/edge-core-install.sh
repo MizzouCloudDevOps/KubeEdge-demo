@@ -28,7 +28,7 @@ fi
 echo -e "\n${GREEN}Installing required libraries.. ${NC}\n"
 apt-get -y update || checkErr "System update"
 apt-get -y upgrade || checkErr "System upgrade"
-apt-get -y install wget net-tools gcc make vim openssh-server docker.io || checkErr "Library installation"
+apt-get -y install wget net-tools gcc make vim openssh-server docker.io containerd || checkErr "Library installation"
 echo -e "\n${BLUE}Required libraries installed... \n"
 
 echo -e "\n${GREEN} Checking Docker installation.. ${NC}\n"
@@ -38,10 +38,11 @@ echo -e "\n${BLUE}Docker successfully installed... \n"
 # install snap package manager
 echo -e "\n${GREEN}Installing snap package manager...${NC}\n"
 apt-get -y install snap
+apt-get -y install snapd
 echo -e "\n${BLUE}Snap successfully installed... \n"
 
 echo -e "\n${GREEN}Installing Kubernetes packages...${NC}\n"
-snap install kubectl --classic || checkErr "Kubectl installation"
+snap install kubectl --channel=1.17/stable --classic || checkErr "Kubectl installation"
 snap install kubeadm --classic || checkErr "Kubeadm installation"
 # Dont install kubelet on EdgeNode
 # apt-get -y install kubelet --classic || checkErr "Kubelet installation error..."
