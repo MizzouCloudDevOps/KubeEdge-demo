@@ -148,28 +148,28 @@ EOF
 echo -e "\n${BLUE}Finished creating kind yaml file...${NC}\n"
 
 # Create KubeEdge cluster using kind
-echo -e "\n${GREEN}Creating KubeEdge cluster using kind...${NC}\n"
-kind create cluster --config=/root/kind.yaml || checkErr "Creating Kubernetes cluster using Kind"
-echo -e "\n${BLUE}Finished creating KubeEdge cluster using kind...${NC}\n"
+# echo -e "\n${GREEN}Creating KubeEdge cluster using kind...${NC}\n"
+# kind create cluster --config=/root/kind.yaml || checkErr "Creating Kubernetes cluster using Kind"
+# echo -e "\n${BLUE}Finished creating KubeEdge cluster using kind...${NC}\n"
 
-echo -e "\n${BLUE}Installing containerd network addon...\n"
+# echo -e "\n${BLUE}Installing containerd network addon...\n"
 # install network cni interface
-kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/2140ac876ef134e0ed5af15c65e414cf26827915/Documentation/kube-flannel.yml || checkErr "Adding Kubernetes cni  network addon"
-echo -e "\n${BLUE}Kubernetes network addon installed... \n"
+# kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/2140ac876ef134e0ed5af15c65e414cf26827915/Documentation/kube-flannel.yml || checkErr "Adding Kubernetes cni  network addon" 
+# echo -e "\n${BLUE}Kubernetes network addon installed... \n"
 
 # Check kubernetes nodes 
-echo -e "\n${GREEN}Checking Kubernetes nodes...${NC}\n"
-kubectl get nodes  || checkErr "Getting kubernetes nodes"
-echo -e "\n${BLUE}Finished checking Kubernetes nodes...${NC}\n"
+# echo -e "\n${GREEN}Checking Kubernetes nodes...${NC}\n"
+# kubectl get nodes  || checkErr "Getting kubernetes nodes"
+# echo -e "\n${BLUE}Finished checking Kubernetes nodes...${NC}\n"
 
 # Create Kubeedge Cloud node 
-echo -e "\n${GREEN}Creating Kubeedge cloud node...${NC}\n"
-keadm init --advertise-address="$cloud_IP" --kubeedge-version="$kubeedgeVersion"  --kube-config=/root/.kube/config || checkErr "Creating Kubeedge cloud node"
-echo -e "\n${BLUE}Finished creating Kubeedge cloud node...${NC}\n"
+# echo -e "\n${GREEN}Creating Kubeedge cloud node...${NC}\n"
+# keadm init --advertise-address="$cloud_IP" --kubeedge-version="$kubeedgeVersion"  --kube-config=/root/.kube/config || checkErr "Creating Kubeedge cloud node"
+# echo -e "\n${BLUE}Finished creating Kubeedge cloud node...${NC}\n"
 
-echo -e "\n${GREEN}The KubeEdge Cloud core node has been prepared successfully... ${NC}\n"
-echo -e "\n${GREEN}Now, you should go prepare the edge node... ${NC}\n"
-echo -e "\n${GREEN}And once it is done, come back to the Cloud node and run the add-edge scripts... ${NC}\n"
+# echo -e "\n${GREEN}The KubeEdge Cloud core node has been prepared successfully... ${NC}\n"
+# echo -e "\n${GREEN}Now, you should go prepare the edge node... ${NC}\n"
+# echo -e "\n${GREEN}And once it is done, come back to the Cloud node and run the add-edge scripts... ${NC}\n"
 
 
 
