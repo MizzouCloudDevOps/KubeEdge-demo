@@ -141,6 +141,8 @@ nodes:
     extraPortMappings:
      - containerPort: 5000
        hostPort: 5000
+     - containerPort: 80
+       hostPort: 80
 
 EOF
 echo -e "\n${BLUE}Finished creating kind yaml file...${NC}\n"
