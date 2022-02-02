@@ -57,7 +57,7 @@ apt-get -y install snapd
 echo -e "\n${BLUE}Snap successfully installed... \n"
 
 echo -e "\n${GREEN}Installing Kubernetes packages...${NC}\n"
-snap install kubectl --channel=1.17/stable --classic || checkErr "Kubectl installation"
+snap install kubectl --classic || checkErr "Kubectl installation"
 snap install kubeadm --classic || checkErr "Kubeadm installation"
 # Dont install kubelet on EdgeNode
 snap install kubelet --classic || checkErr "Kubelet installation"
@@ -90,7 +90,7 @@ export GO111MODULE=auto" | tee -a /etc/bash.bashrc || checkErr "Adding path envi
 echo -e "\n${BLUE}Go path environment variables successfully loaded...${NC}\n"
 
 # install Kubeedge v1.9.1
-echo -e "\n${GREEN}Installing KubeEdge v1.9.10...${NC}\n"
+echo -e "\n${GREEN}Installing KubeEdge v1.9.1...${NC}\n"
 mkdir -p /etc/kubeedge/ || checkErr "Error: Not able to create kubeedge directory..."
 cd /etc/kubeedge
 
