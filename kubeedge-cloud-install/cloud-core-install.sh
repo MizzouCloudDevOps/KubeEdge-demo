@@ -35,14 +35,14 @@ fi
 # $1: IP of Cloud node 
 cloud_IP=$1
 
-kubeedgeVersion=1.7.1
+kubeedgeVersion=1.9.1
 
 cd /root/
 # install library prerequisites
 echo -e "\n${GREEN}Installing required libraries.. ${NC}\n"
 apt-get -y update || checkErr "System update"
 apt-get -y upgrade || checkErr "System upgrade"
-apt-get -y install wget net-tools gcc make vim openssh-server docker.io containerd || checkErr "Library installation"
+apt-get -y install wget net-tools gcc make vim openssh-server docker.io || checkErr "Library installation"
 echo -e "\n${BLUE}Required libraries installed... \n"
 
 echo -e "\n${GREEN} Checking Docker installation.. ${NC}\n"
@@ -89,15 +89,15 @@ export GO111MODULE=auto" | tee -a /etc/bash.bashrc || checkErr "Adding path envi
 /bin/bash -c '. /etc/bash.bashrc' || checkErr "Loading environment variables..."
 echo -e "\n${BLUE}Go path environment variables successfully loaded...${NC}\n"
 
-# install Kubeedge v1.6.0
-echo -e "\n${GREEN}Installing KubeEdge v1.6.0...${NC}\n"
+# install Kubeedge v1.9.1
+echo -e "\n${GREEN}Installing KubeEdge v1.9.10...${NC}\n"
 mkdir -p /etc/kubeedge/ || checkErr "Error: Not able to create kubeedge directory..."
 cd /etc/kubeedge
 
 # The following Kubeedge version is only for CloudNode with AMD64 architecture
-# echo -e "\n${GREEN}Downloading KubeEdge v1.6.0...${NC}\n"
-# wget https://github.com/kubeedge/kubeedge/releases/download/v1.6.0/kubeedge-v1.6.0-linux-amd64.tar.gz || checkErr "Error downloading Kubeedge ..."
-# echo -e "\n${BLUE}Kubeedge successfully downloaded...${NC}\n"
+echo -e "\n${GREEN}Downloading KubeEdge v1.9.1...${NC}\n"
+wget https://github.com/kubeedge/kubeedge/releases/download/v1.9.1/kubeedge-v1.9.1-linux-amd64.tar.gz || checkErr "Error downloading Kubeedge ..."
+echo -e "\n${BLUE}Kubeedge successfully downloaded...${NC}\n"
 
 echo -e "\n${GREEN}Downloading KubeEdge git repo...${NC}\n"
 rm -rf /usr/go/src/github.com/kubeedge/kubeedge
@@ -127,25 +127,6 @@ systemctl restart docker || checkErr "Docker restart "
 docker pull kindest/node:v1.17.2 || checkErr "Downloading kindest Docker image"
 echo -e "\n${BLUE}Finished downloading kindest Docker image...${NC}\n"
 
-# Configure kindest
-echo -e "\n${GREEN}  ...${NC}\n"
-tee /root/kind.yaml <<-'EOF'
-kind: Cluster
-apiVersion: kind.x-k8s.io/v1alpha4
-networking:
-  apiServerAddress: "127.0.0.1"
-  apiServerPort: 6443
-nodes:
-  - role: control-plane
-    image: kindest/node:v1.17.2
-    extraPortMappings:
-     - containerPort: 5000
-       hostPort: 5000
-     - containerPort: 80
-       hostPort: 80
-
-EOF
-echo -e "\n${BLUE}Finished creating kind yaml file...${NC}\n"
 
 # Create KubeEdge cluster using kind
 # echo -e "\n${GREEN}Creating KubeEdge cluster using kind...${NC}\n"

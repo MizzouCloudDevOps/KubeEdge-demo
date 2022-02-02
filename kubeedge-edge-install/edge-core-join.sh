@@ -11,7 +11,7 @@
 cloud_IP=$1
 token=$2
 edge_name=$3
-kubeedgeVersion=1.7.1
+kubeedgeVersion=1.9.1
 
 #check to make sure argument edgeNode IP provided
 if [ "$#" -ne 3 ]; then
