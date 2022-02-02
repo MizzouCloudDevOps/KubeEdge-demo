@@ -124,7 +124,7 @@ echo -e "\n${BLUE}Go Kind successfully installed...${NC}\n"
 # Download kindest
 echo -e "\n${GREEN}Downloading kindest Docker image...${NC}\n"
 systemctl restart docker || checkErr "Docker restart "
-docker pull kindest/node:v1.17.2 || checkErr "Downloading kindest Docker image"
+docker pull kindest/node:v1.23.3 || checkErr "Downloading kindest Docker image"
 echo -e "\n${BLUE}Finished downloading kindest Docker image...${NC}\n"
 
 
