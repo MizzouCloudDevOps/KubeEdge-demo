@@ -117,14 +117,14 @@ echo -e "\n${BLUE}SSH key pair created...${NC}\n"
 # Install Go Kind
 echo -e "\n${GREEN}Installing Go Kind ...${NC}\n"
 cd /root/ || checkErr "Is there a /root directory? I am not able to go to that directory..."
-GO111MODULE="on" go get sigs.k8s.io/kind@v0.7.0 || checkErr "Getting Go kind"
+go get sigs.k8s.io/kind@v0.11.1 || checkErr "Getting Go kind"
 kind version || checkErr "Error installing kind..."
 echo -e "\n${BLUE}Go Kind successfully installed...${NC}\n"
 
 # Download kindest
 echo -e "\n${GREEN}Downloading kindest Docker image...${NC}\n"
 systemctl restart docker || checkErr "Docker restart "
-docker pull kindest/node:v1.23.3 || checkErr "Downloading kindest Docker image"
+docker pull kindest/node:v1.22.2 || checkErr "Downloading kindest Docker image"
 echo -e "\n${BLUE}Finished downloading kindest Docker image...${NC}\n"
 
 
