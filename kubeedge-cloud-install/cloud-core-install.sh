@@ -134,8 +134,8 @@ echo -e "\n${BLUE}Finished downloading kindest Docker image...${NC}\n"
 # echo -e "\n${BLUE}Finished creating KubeEdge cluster using kind...${NC}\n"
 
 # echo -e "\n${BLUE}Installing containerd network addon...\n"
-# install network cni interface
-# kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/2140ac876ef134e0ed5af15c65e414cf26827915/Documentation/kube-flannel.yml || checkErr "Adding Kubernetes cni  network addon" 
+# install network cni interface, this is not needed in newer version (1.22.2)
+## kubectl apply -f KubeEdge-demo/kubeedge-cluster-config/kube-flannel.yml || checkErr "Adding Kubernetes cni  network addon" 
 # echo -e "\n${BLUE}Kubernetes network addon installed... \n"
 
 # Check kubernetes nodes 
