@@ -35,7 +35,7 @@ fi
 # $1: IP of Cloud node 
 cloud_IP=$1
 
-kubeedgeVersion=1.7.1
+kubeedgeVersion=1.9.1
 
 cd /root/
 # install library prerequisites
@@ -57,7 +57,7 @@ apt-get -y install snapd
 echo -e "\n${BLUE}Snap successfully installed... \n"
 
 echo -e "\n${GREEN}Installing Kubernetes packages...${NC}\n"
-snap install kubectl --channel=1.17/stable --classic || checkErr "Kubectl installation"
+snap install kubectl --classic || checkErr "Kubectl installation"
 snap install kubeadm --classic || checkErr "Kubeadm installation"
 # Dont install kubelet on EdgeNode
 snap install kubelet --classic || checkErr "Kubelet installation"
@@ -95,8 +95,8 @@ mkdir -p /etc/kubeedge/ || checkErr "Error: Not able to create kubeedge director
 cd /etc/kubeedge
 
 # The following Kubeedge version is only for CloudNode with AMD64 architecture
-echo -e "\n${GREEN}Downloading KubeEdge v1.7.1...${NC}\n"
-wget https://github.com/kubeedge/kubeedge/releases/download/v1.7.1/kubeedge-v1.7.1-linux-amd64.tar.gz || checkErr "Error downloading Kubeedge ..."
+echo -e "\n${GREEN}Downloading KubeEdge v1.9.1...${NC}\n"
+wget https://github.com/kubeedge/kubeedge/releases/download/v1.9.1/kubeedge-v1.9.1-linux-amd64.tar.gz || checkErr "Error downloading Kubeedge ..."
 echo -e "\n${BLUE}Kubeedge successfully downloaded...${NC}\n"
 
 echo -e "\n${GREEN}Downloading KubeEdge git repo...${NC}\n"
@@ -124,33 +124,33 @@ echo -e "\n${BLUE}Go Kind successfully installed...${NC}\n"
 # Download kindest
 echo -e "\n${GREEN}Downloading kindest Docker image...${NC}\n"
 systemctl restart docker || checkErr "Docker restart "
-docker pull kindest/node:v1.17.2 || checkErr "Downloading kindest Docker image"
+docker pull kindest/node:v1.22.2 || checkErr "Downloading kindest Docker image"
 echo -e "\n${BLUE}Finished downloading kindest Docker image...${NC}\n"
 
 
 # Create KubeEdge cluster using kind
-echo -e "\n${GREEN}Creating KubeEdge cluster using kind...${NC}\n"
-kind create cluster --config=/root/KubeEdge-demo/kubeedge-cluster-config/kind.yaml || checkErr "Creating Kubernetes cluster using Kind"
-echo -e "\n${BLUE}Finished creating KubeEdge cluster using kind...${NC}\n"
+# echo -e "\n${GREEN}Creating KubeEdge cluster using kind...${NC}\n"
+# kind create cluster --config=/root/kind.yaml || checkErr "Creating Kubernetes cluster using Kind"
+# echo -e "\n${BLUE}Finished creating KubeEdge cluster using kind...${NC}\n"
 
-echo -e "\n${BLUE}Installing containerd network addon...\n"
-install network cni interface, this is not needed in newer version (1.22.2)
-kubectl apply -f KubeEdge-demo/kubeedge-cluster-config/kube-flannel.yml || checkErr "Adding Kubernetes cni  network addon" 
-echo -e "\n${BLUE}Kubernetes network addon installed... \n"
+# echo -e "\n${BLUE}Installing containerd network addon...\n"
+# install network cni interface, this is not needed in newer version (1.22.2)
+## kubectl apply -f KubeEdge-demo/kubeedge-cluster-config/kube-flannel.yml || checkErr "Adding Kubernetes cni  network addon" 
+# echo -e "\n${BLUE}Kubernetes network addon installed... \n"
 
 # Check kubernetes nodes 
-echo -e "\n${GREEN}Checking Kubernetes nodes...${NC}\n"
-kubectl get nodes  || checkErr "Getting kubernetes nodes"
-echo -e "\n${BLUE}Finished checking Kubernetes nodes...${NC}\n"
+# echo -e "\n${GREEN}Checking Kubernetes nodes...${NC}\n"
+# kubectl get nodes  || checkErr "Getting kubernetes nodes"
+# echo -e "\n${BLUE}Finished checking Kubernetes nodes...${NC}\n"
 
 # Create Kubeedge Cloud node 
-echo -e "\n${GREEN}Creating Kubeedge cloud node...${NC}\n"
-keadm init --advertise-address="$cloud_IP" --kubeedge-version="$kubeedgeVersion"  --kube-config=/root/.kube/config || checkErr "Creating Kubeedge cloud node"
-echo -e "\n${BLUE}Finished creating Kubeedge cloud node...${NC}\n"
+# echo -e "\n${GREEN}Creating Kubeedge cloud node...${NC}\n"
+# keadm init --advertise-address="$cloud_IP" --kubeedge-version="$kubeedgeVersion"  --kube-config=/root/.kube/config || checkErr "Creating Kubeedge cloud node"
+# echo -e "\n${BLUE}Finished creating Kubeedge cloud node...${NC}\n"
 
-echo -e "\n${GREEN}The KubeEdge Cloud core node has been prepared successfully... ${NC}\n"
-echo -e "\n${GREEN}Now, you should go prepare the edge node... ${NC}\n"
-echo -e "\n${GREEN}And once it is done, come back to the Cloud node and run the add-edge scripts... ${NC}\n"
+# echo -e "\n${GREEN}The KubeEdge Cloud core node has been prepared successfully... ${NC}\n"
+# echo -e "\n${GREEN}Now, you should go prepare the edge node... ${NC}\n"
+# echo -e "\n${GREEN}And once it is done, come back to the Cloud node and run the add-edge scripts... ${NC}\n"
 
 
 
