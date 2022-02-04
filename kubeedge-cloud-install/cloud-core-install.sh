@@ -134,7 +134,7 @@ kind create cluster --config=/root/KubeEdge-demo/kubeedge-cluster-config/kind.ya
 echo -e "\n${BLUE}Finished creating KubeEdge cluster using kind...${NC}\n"
 
 echo -e "\n${BLUE}Installing containerd network addon...\n"
-install network cni interface, this is not needed in newer version (1.22.2)
+# install network cni interface, this is not needed in newer version (1.22.2)
 kubectl apply -f KubeEdge-demo/kubeedge-cluster-config/kube-flannel.yml || checkErr "Adding Kubernetes cni  network addon" 
 echo -e "\n${BLUE}Kubernetes network addon installed... \n"
 
