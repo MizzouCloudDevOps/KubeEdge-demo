@@ -117,7 +117,7 @@ echo -e "\n${BLUE}SSH key pair created...${NC}\n"
 # Install Go Kind
 echo -e "\n${GREEN}Installing Go Kind ...${NC}\n"
 cd /root/ || checkErr "Is there a /root directory? I am not able to go to that directory..."
-go get sigs.k8s.io/kind@v0.11.1 || checkErr "Getting Go kind"
+go install sigs.k8s.io/kind@v0.11.1 || checkErr "Getting Go kind"
 kind version || checkErr "Error installing kind..."
 echo -e "\n${BLUE}Go Kind successfully installed...${NC}\n"
 
