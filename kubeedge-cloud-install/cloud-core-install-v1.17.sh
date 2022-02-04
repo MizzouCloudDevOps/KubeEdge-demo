@@ -35,7 +35,7 @@ fi
 # $1: IP of Cloud node 
 cloud_IP=$1
 
-kubeedgeVersion=1.9.1
+kubeedgeVersion=1.7.1
 
 cd /root/
 # install library prerequisites
@@ -57,7 +57,7 @@ apt-get -y install snapd
 echo -e "\n${BLUE}Snap successfully installed... \n"
 
 echo -e "\n${GREEN}Installing Kubernetes packages...${NC}\n"
-snap install kubectl --classic || checkErr "Kubectl installation"
+snap install kubectl --channel=1.17/stable --classic || checkErr "Kubectl installation"
 snap install kubeadm --classic || checkErr "Kubeadm installation"
 # Dont install kubelet on EdgeNode
 snap install kubelet --classic || checkErr "Kubelet installation"
@@ -95,8 +95,8 @@ mkdir -p /etc/kubeedge/ || checkErr "Error: Not able to create kubeedge director
 cd /etc/kubeedge
 
 # The following Kubeedge version is only for CloudNode with AMD64 architecture
-echo -e "\n${GREEN}Downloading KubeEdge v1.9.1...${NC}\n"
-wget https://github.com/kubeedge/kubeedge/releases/download/v1.9.1/kubeedge-v1.9.1-linux-amd64.tar.gz || checkErr "Error downloading Kubeedge ..."
+echo -e "\n${GREEN}Downloading KubeEdge v1.7.1...${NC}\n"
+wget https://github.com/kubeedge/kubeedge/releases/download/v1.7.1/kubeedge-v1.7.1-linux-amd64.tar.gz || checkErr "Error downloading Kubeedge ..."
 echo -e "\n${BLUE}Kubeedge successfully downloaded...${NC}\n"
 
 echo -e "\n${GREEN}Downloading KubeEdge git repo...${NC}\n"
@@ -124,7 +124,7 @@ echo -e "\n${BLUE}Go Kind successfully installed...${NC}\n"
 # Download kindest
 echo -e "\n${GREEN}Downloading kindest Docker image...${NC}\n"
 systemctl restart docker || checkErr "Docker restart "
-docker pull kindest/node:v1.22.2 || checkErr "Downloading kindest Docker image"
+docker pull kindest/node:v1.17.2 || checkErr "Downloading kindest Docker image"
 echo -e "\n${BLUE}Finished downloading kindest Docker image...${NC}\n"
 
 

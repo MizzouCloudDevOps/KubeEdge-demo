@@ -5,7 +5,7 @@ networking:
   apiServerPort: 6443
 nodes:
   - role: control-plane
-    image: kindest/node:v1.17.2
+    image: kindest/node:v1.22.2
     extraPortMappings:
       - containerPort: 5000
         hostPort: 5000
