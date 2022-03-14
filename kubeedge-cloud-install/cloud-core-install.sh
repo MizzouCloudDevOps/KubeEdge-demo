@@ -106,6 +106,7 @@ echo -e "\n${BLUE}Kubeedge git repo successfully downloaded...${NC}\n"
 
 echo -e "\n${GREEN}Compiling Keadm...${NC}\n"
 cd $GOPATH/src/github.com/kubeedge/kubeedge  || checkErr "Going into Kubeedge directory"
+git checkout release-1.7
 make all WHAT=keadm || checkErr "Error compiling Kubeedge ..."
 cp ./_output/local/bin/keadm /usr/bin/ || checkErr "Copying keadm into /usr/bin/ "
 
