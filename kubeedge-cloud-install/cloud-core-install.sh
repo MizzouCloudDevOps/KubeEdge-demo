@@ -58,9 +58,9 @@ echo -e "\n${BLUE}Snap successfully installed... \n"
 
 echo -e "\n${GREEN}Installing Kubernetes packages...${NC}\n"
 snap install kubectl --channel=1.17/stable --classic || checkErr "Kubectl installation"
-snap install kubeadm --classic || checkErr "Kubeadm installation"
+snap install kubeadm --channel=1.17/stable --classic || checkErr "Kubeadm installation"
 # Dont install kubelet on EdgeNode
-snap install kubelet --classic || checkErr "Kubelet installation"
+snap install kubelet --channel=1.17/stable --classic || checkErr "Kubelet installation"
 # check Kubernetes install
 echo -e "\n${GREEN} Checking Kubernetes installation.. ${NC}\n"
 kubectl version
