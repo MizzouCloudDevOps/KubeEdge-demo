@@ -18,7 +18,7 @@ spec:
         tier: server
     spec:
       nodeSelector:
-        kubernetes.io/hostname: edge1
+        kubernetes.io/hostname: Name_of_your_Node
       containers:
       - name: fastqc
         image: mizzouceri/fastqc_wf:V2
